@@ -8,9 +8,10 @@
 /spec/reports/
 /tmp/
 test.rb
-eversign-*.gem
 *.pdf
 *.jpg
 .vscode/
 .idea/*
 .ruby-version
+.env
+*.gem

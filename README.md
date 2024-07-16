@@ -12,35 +12,47 @@ gem 'eversign'
 
 And then execute:
 
-    $ bundle
+```shell
+$ bundle
+```
 
 Or install it yourself as:
 
-    $ gem install eversign
+```shell
+$ gem install eversign
+```
 
 ## Configuration
 
-		Eversign.configure do |c|
-		  c.api_base = '<YOUR_BASE_API>|https://api.eversign.com/api'
-		  c.access_key = '<YOUR_API_KEY>'
-		  c.business_id = <YOUR_BUISINESS_ID>
-		end
+```ruby
+Eversign.configure do |c|
+  c.api_base = '<YOUR_BASE_API>|https://api.eversign.com/api'
+  c.access_key = '<YOUR_API_KEY>'
+  c.business_id = <YOUR_BUISINESS_ID>
+end
+```
 
 OR directly set on client if needed
 
-		client.business_id = <YOUR_BUISINESS_ID>
+```ruby
+client.business_id = <YOUR_BUISINESS_ID>
+```
 
 
 ## Usage
 
-		client = Eversign::Client.new
+```ruby
+client = Eversign::Client.new
+```
 
 ### Get All businesses
 Using the `gwt_businesses` function all businesses on the eversign account will be fetched and listed along with their Business IDs.
 
 
-		businesses = client.get_businesses()
-		p businesses[0]
+```ruby
+businesses = client.get_businesses()
+p businesses[0]
+```
 
 
 ### Get Documents
@@ -48,33 +60,45 @@ Using the following functions required documents on the eversign account associa
 
 #### All
 
-		documents = client.get_all_ocuments()
-		p documents
+```ruby
+documents = client.get_all_ocuments()
+p documents
+```
 
 #### Completed
 
-		documents = client.get_completed_documents()
-		p documents
+```ruby
+documents = client.get_completed_documents()
+p documents
+```
 
 #### Draft
 
-		documents = client.get_draft_documents()
-		p documents
+```ruby
+documents = client.get_draft_documents()
+p documents
+```
 
 #### Cancelled
 
-		documents = client.get_cancelled_documents()
-		p documents
+```ruby
+documents = client.get_cancelled_documents()
+p documents
+```
 
 #### Action Required
 
-		documents = client.get_action_required_documents()
-		p documents
+```ruby
+documents = client.get_action_required_documents()
+p documents
+```
 
 #### Waiting for Others
 
-		documents = client.get_waiting_for_others_documents()
-		p documents
+```ruby
+documents = client.get_waiting_for_others_documents()
+p documents
+```
 
 
 ### Get Templates
@@ -82,44 +106,60 @@ Using the following functions required templates on the eversign account associa
 
 #### All
 
-		templates = client.get_templates
-		p templates
+```ruby
+templates = client.get_templates
+p templates
+```
 
 #### Archieved
 
-		templates = client.get_archived_templates()
-		p templates
+```ruby
+templates = client.get_archived_templates()
+p templates
+```
 
 #### Draft
 
-		templates = client.get_draft_templates()
-		p templates
+```ruby
+templates = client.get_draft_templates()
+p templates
+```
 
 ### Get Document
 Using the `get_document` function specific document on the eversign account associated with given business id and document hash will be fetched and listed.
 
-		document = client.get_document(<DOCUMENT_HASH>)
-		p document
+```ruby
+document = client.get_document(<DOCUMENT_HASH>)
+p document
+```
 
 
 ### [Create Document](/examples/create_document.rb)
 
 ### Upload file
-		
-		file = client.upload_file(<FILE_PATH>)
-		p file.file_id
+
+```ruby
+file = client.upload_file(<FILE_PATH>)
+p file.file_id
+```
 
 ### Download raw file
-		
-		client.download_raw_document_to_path(<DOCUMENT_HASH>,<FILE_PATH>)
+
+```ruby
+client.download_raw_document_to_path(<DOCUMENT_HASH>,<FILE_PATH>)
+```
 
 ### Download final file
-		
-		client.download_final_document_to_path(<DOCUMENT_HASH>,<FILE_PATH>)
+
+```ruby
+client.download_final_document_to_path(<DOCUMENT_HASH>,<FILE_PATH>)
+```
 
 ### Send Email Reminder
 
-		send_reminder_for_document(<DOCUMENT_HASH>,<SIGNER_ID>)
+```ruby
+send_reminder_for_document(<DOCUMENT_HASH>,<SIGNER_ID>)
+```
 
 ## Development
 
@@ -134,8 +174,10 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Testing
 
-		bundle exec COVERAGE=1 rspec
-		
+```shell
+bundle exec COVERAGE=1 rspec
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/eversign/eversign-ruby-sdk. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.

@@ -1,0 +1,4 @@
+inherit_gem:
+  rubocop-rubomatic:
+    - config/rubocop.yml
+    - config/gemspec_on.yml

@@ -17,17 +17,17 @@ require_relative 'eversign/mappings/document'
 require_relative 'eversign/mappings/exception'
 
 module Eversign
-	include Configurations
-	configurable String, :access_key
-	configurable Integer, :business_id
-	configurable String, :oauth_base
-	configurable String, :api_base do |value|
-		value ||= 'https://api.eversign.com'
-		parsed = Addressable::URI.parse(value)
-  	if %w(http https).include?(parsed.scheme)
-  		value
-		else
-			raise ArgumentError 'Invalid API Base URL' 
-		end
-	end
+  include Configurations
+  configurable String, :access_key
+  configurable Integer, :business_id
+  configurable String, :oauth_base
+  configurable String, :api_base do |value|
+    value ||= 'https://api.eversign.com'
+    parsed = Addressable::URI.parse(value)
+    if %w(http https).include?(parsed.scheme)
+      value
+    else
+      raise ArgumentError 'Invalid API Base URL' 
+    end
+  end
 end

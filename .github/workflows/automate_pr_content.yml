@@ -1,0 +1,16 @@
+name: Automate PR content
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+jobs:
+  automate-pr-content:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Automate PR content
+        uses: BrandsInsurance/automate-pr-content@v2.0.2
