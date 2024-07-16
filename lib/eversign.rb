@@ -1,18 +1,29 @@
+# frozen_string_literal: true
+
 require 'eversign/version'
+
 require 'configurations'
+
 require 'addressable/uri'
 require_relative 'eversign/client'
 require_relative 'eversign/models/business'
 require_relative 'eversign/models/file'
+
 require_relative 'eversign/models/field'
+
 require_relative 'eversign/models/signer'
+
 require_relative 'eversign/models/recipient'
+
 require_relative 'eversign/models/document'
 require_relative 'eversign/models/template'
+
 require_relative 'eversign/models/error'
 require_relative 'eversign/models/exception'
+
 require_relative 'eversign/mappings/business'
 require_relative 'eversign/mappings/file'
+
 require_relative 'eversign/mappings/document'
 require_relative 'eversign/mappings/exception'
 

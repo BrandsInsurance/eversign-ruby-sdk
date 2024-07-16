@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'kartograph'
 require_relative '../models/document'
 
@@ -116,31 +118,31 @@ module Eversign
       def self.extract_single(content, scope)
         obj = super(content, scope)
         data = JSON.parse(content)
-        if data['fields']
-          data['fields'].each do |field_list|
-            field_data = []
-            field_list.each do |field|
-              extracted_field = Field.extract_single(field.to_json, nil)
-              field_data << extracted_field if extracted_field
-            end
-            obj.add_field_list(field_data)
+
+        data['fields']&.each do |field_list|
+          field_data = []
+          field_list.each do |field|
+            extracted_field = Field.extract_single(field.to_json, nil)
+            field_data << extracted_field if extracted_field
           end
+          obj.add_field_list(field_data)
         end
+
         obj
       end
 
       def self.representation_for(document)
         data = super(nil, document)
         list = []
-        if document.fields
-          document.fields.each do |field_list|
-            field_data = []
-            field_list.each do |field|
-              field_data << JSON.parse(Field.representation_for(nil, field))
-            end
-            list << field_data
+
+        document.fields&.each do |field_list|
+          field_data = []
+          field_list.each do |field|
+            field_data << JSON.parse(Field.representation_for(nil, field))
           end
+          list << field_data
         end
+
         data = JSON.parse(data)
         data['fields'] = list
         JSON.dump(data)

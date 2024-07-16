@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'kartograph'
 require_relative '../models/business'
 

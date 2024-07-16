@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
 require 'active_model'
 module Eversign
   module Models
     class File
       include ActiveModel::Validations
+
+      validate :only_one_option
 
       attr_accessor :name
       attr_accessor :file_id
@@ -10,8 +14,6 @@ module Eversign
       attr_accessor :file_base64
       attr_accessor :pages
       attr_accessor :total_pages
-
-      validate :only_one_option
 
       def initialize(name = nil)
         self.name = name

@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 require 'eversign'
+
 require 'configurations'
 
 module Config
@@ -25,7 +28,4 @@ Config.configure do |c|
   c.template_id = 'xxxx'
   c.field_identifier = 'xxx'
   c.oauth_client_id = 'xxx'
-  oauth_client_secret = 'xxx'
-  code = ''
-  state = ''
 end

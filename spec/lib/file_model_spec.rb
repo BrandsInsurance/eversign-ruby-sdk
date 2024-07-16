@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe Eversign::Models::File do
   describe 'valid?' do
     let(:obj) { Eversign::Models::File.new('test') }

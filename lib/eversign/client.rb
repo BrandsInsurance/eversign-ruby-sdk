@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'addressable/template'
 require 'faraday'
 require 'faraday/multipart'
@@ -5,7 +7,7 @@ require 'json'
 require 'logger'
 
 module Eversign
-  class FileNotFoundException < Exception
+  class FileNotFoundException < StandardError
   end
 
   class Client
@@ -29,14 +31,14 @@ module Eversign
         if oauthtoken.startswith('Bearer ')
           oauthtoken
         else
-          'Bearer ' + oauthtoken
+          "Bearer #{oauthtoken}"
         end
       get_businesses
     end
 
     def generate_oauth_authorization_url(options)
       check_arguments(%w[client_id state], options)
-      template = Addressable::Template.new(Eversign.configuration.oauth_base + '/authorize{?clinet_id,state}')
+      template = Addressable::Template.new("#{Eversign.configuration.oauth_base}/authorize{?clinet_id,state}")
       return template.partial_expand(clinet_id: options['client_id'], state: options['state']).pattern
     end
 
@@ -103,15 +105,14 @@ module Eversign
     end
 
     def create_document(document)
-      if document.files
-        for file in document.files
-          next unless file.file_url
+      document.files&.each do |file|
+        next unless file.file_url
 
-          file_response = upload_file(file.file_url)
-          file.file_url = nil
-          file.file_id = file_response.file_id
-        end
+        file_response = upload_file(file.file_url)
+        file.file_url = nil
+        file.file_id = file_response.file_id
       end
+
       path = "/api/document?access_key=#{access_key}&business_id=#{business_id}"
       data = Eversign::Mappings::Document.representation_for(document)
       response = execute_request(:post, path, data)
@@ -133,12 +134,16 @@ module Eversign
     end
 
     def download_raw_document_to_path(document_hash, path)
-      sub_uri = "/api/download_raw_document?access_key=#{access_key}&business_id=#{business_id}&document_hash=#{document_hash}"
+      sub_uri =
+        "/api/download_raw_document?access_key=#{access_key}&business_id=#{business_id}&document_hash=#{document_hash}"
       download(sub_uri, path)
     end
 
     def download_final_document_to_path(document_hash, path, audit_trail = 1)
-      sub_uri = "/api/download_final_document?access_key=#{access_key}&business_id=#{business_id}&document_hash=#{document_hash}&audit_trail=#{audit_trail}"
+      sub_uri = [
+        "/api/download_final_document?access_key=#{access_key}&business_id=#{business_id}&document_hash=",
+        "#{document_hash}&audit_trail=#{audit_trail}"
+      ].join('')
       download(sub_uri, path)
     end
 
@@ -166,7 +171,7 @@ module Eversign
           conn.adapter(:net_http)
         end
 
-        @faraday.send(method) do |request|
+        @faraday.__send__(method) do |request|
           request.url(path)
           request.body = body if body
         end
@@ -174,7 +179,7 @@ module Eversign
 
       def check_arguments(arguments = [], options = {})
         arguments.each do |argument|
-          raise('Please specify ' + argument) unless options.has_key?(argument.to_sym)
+          raise("Please specify #{argument}") unless options.has_key?(argument.to_sym)
         end
       end
 

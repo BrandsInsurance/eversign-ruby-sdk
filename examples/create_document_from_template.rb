@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'config'
 
 document_template = Eversign::Models::Template.new

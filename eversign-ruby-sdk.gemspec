@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 lib = File.expand_path('lib', __dir__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+$LOAD_PATH.unshift(lib) if $LOAD_PATH.exclude?(lib)
+
 require 'eversign/version'
 
 Gem::Specification.new do |spec|
@@ -29,7 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency('bundler', '~> 2')
   spec.add_development_dependency('rake', '~> 10.0')
   spec.add_development_dependency('rspec', '~> 3.0')
-  spec.add_development_dependency('simplecov')
+  spec.add_development_dependency('simplecov', '0.22.0')
 
   spec.add_development_dependency('rubocop-rubomatic', '>= 1.0.0', '< 2.0')
   spec.metadata['rubygems_mfa_required'] = 'true'

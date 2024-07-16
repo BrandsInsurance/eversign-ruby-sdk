@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Eversign
   module Models
     class Document

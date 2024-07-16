@@ -2,6 +2,10 @@
 
 * Allow more up to date rubies
 
+=== Breaking changes
+
+* ``Eversign::FileNotFoundException`` now inherits from ``StandardError``
+
 == 0.2.0
 
 * Initial release
