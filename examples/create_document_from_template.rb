@@ -1,19 +1,18 @@
-require_relative 'config'
+# frozen_string_literal: true
 
+require_relative 'config'
 
 document_template = Eversign::Models::Template.new
 document_template.template_id = Config.configuration.template_id
 document_template.title = 'Title goes here'
 document_template.message = 'my message'
 
-signer = Eversign::Models::Signer.new(
-    name='Jane Doe', email='signer@gmail.com', role='Client')
+signer = Eversign::Models::Signer.new('Jane Doe', 'signer@gmail.com', 'Client')
 document_template.add_signer(signer)
-signer = Eversign::Models::Signer.new(
-    name='Jane Doe2', email='signer2@gmail.com', role='Partner')
+signer = Eversign::Models::Signer.new('Jane Doe2', 'signer2@gmail.com', 'Partner')
 document_template.add_signer(signer)
 
-recipient = Eversign::Models::Recipient.new(name='Test', email='recipient@gmail.com', role='Partner')
+recipient = Eversign::Models::Recipient.new('Test', 'recipient@gmail.com', 'Partner')
 document_template.add_recipient(recipient)
 field = Eversign::Models::Field.new
 field.identifier = Config.configuration.template_id
@@ -22,4 +21,4 @@ document_template.add_field(field)
 
 client = Eversign::Client.new
 finished_document = client.create_document_from_template(document_template)
-p finished_document
+p(finished_document)

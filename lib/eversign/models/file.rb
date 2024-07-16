@@ -1,30 +1,37 @@
+# frozen_string_literal: true
+
 require 'active_model'
 module Eversign
-	module Models
-		class File
+  module Models
+    class File
       include ActiveModel::Validations
-
-	    attr_accessor :name, :file_id, :file_url, :file_base64, :pages, :total_pages
 
       validate :only_one_option
 
-	    def initialize(name=nil)
-	    	self.name = name
-	    end
+      attr_accessor :name
+      attr_accessor :file_id
+      attr_accessor :file_url
+      attr_accessor :file_base64
+      attr_accessor :pages
+      attr_accessor :total_pages
 
-      def only_one_option()
-        error = false
-        if file_id && !file_id.empty?
-          error = file_url || file_base64
-        elsif file_url && !file_url.empty?
-          error = file_id || file_base64
-        elsif file_base64 && !file_base64.empty?
-          error = file_id || file_url
-        else
-          error = true
-        end
+      def initialize(name = nil)
+        self.name = name
+      end
+
+      def only_one_option
+        error =
+          if file_id && !file_id.empty?
+            file_url || file_base64
+          elsif file_url && !file_url.empty?
+            file_id || file_base64
+          elsif file_base64 && !file_base64.empty?
+            file_id || file_url
+          else
+            true
+          end
         errors.add('Please provide only one file option') if error
       end
-		end
-	end
+    end
+  end
 end

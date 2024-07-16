@@ -1,0 +1,12 @@
+# Development compose override
+# Command: docker compose up -d
+
+services:
+  gem:
+    build: .
+    image: "eversign-ruby-sdk:${EVERSIGN_TAG:-1}"
+    tty: true
+    stdin_open: true
+    command: /bin/bash
+    volumes:
+      - .:/Eversign

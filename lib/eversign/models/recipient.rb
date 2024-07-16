@@ -1,13 +1,17 @@
-module Eversign
-	module Models
-		class Recipient
-	    attr_accessor :name, :email, :role
+# frozen_string_literal: true
 
-	    def initialize(name=nil, email=nil, role=nil)
-	    	self.name = name
-	    	self.email = email
+module Eversign
+  module Models
+    class Recipient
+      attr_accessor :name
+      attr_accessor :email
+      attr_accessor :role
+
+      def initialize(name = nil, email = nil, role = nil)
+        self.name = name
+        self.email = email
         self.role = role
-	    end
-		end
-	end
+      end
+    end
+  end
 end

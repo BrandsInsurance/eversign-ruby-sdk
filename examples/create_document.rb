@@ -1,24 +1,26 @@
+# frozen_string_literal: true
+
 require_relative 'config'
 
 document = Eversign::Models::Document.new
 document.title = 'Title goes here'
 document.message = 'tester@gmail.com'
 
-recipient = Eversign::Models::Recipient.new(name='Test', email='recipient@gmail.com')
+recipient = Eversign::Models::Recipient.new('Test', 'recipient@gmail.com')
 
-file = Eversign::Models::File.new(name="Test")
+file = Eversign::Models::File.new('Test')
 file.file_url = 'pic.jpg'
 
 signer = Eversign::Models::Signer.new
-signer.id="1"
-signer.name = "Jane Doe"
+signer.id = '1'
+signer.name = 'Jane Doe'
 signer.email = 'signer@gmail.com'
 
 field = Eversign::Models::Field.new
 
-field.identifier = "Test"
-field.x = "120.43811219947"
-field.y = "479.02760463045"
+field.identifier = 'Test'
+field.x = '120.43811219947'
+field.y = '479.02760463045'
 field.page = 1
 field.signer = 1
 field.width = 120
@@ -32,7 +34,7 @@ document.add_field(field)
 document.add_file(file)
 document.add_signer(signer)
 document.add_recipient(recipient)
-recipient = Eversign::Models::Recipient.new(name='Test2', email='recipient2@gmail.com')
+recipient = Eversign::Models::Recipient.new('Test2', 'recipient2@gmail.com')
 document.add_recipient(recipient)
 
 client = Eversign::Client.new

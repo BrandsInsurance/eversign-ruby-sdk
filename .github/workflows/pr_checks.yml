@@ -1,0 +1,16 @@
+name: Run PR checks
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+    branches-ignore:
+      - production
+jobs:
+  rubocop:
+    uses: BrandsInsurance/expert-chainsaw/.github/workflows/rubocop.yml@check_rubocop.v1.0.0
+    with:
+      ruby-version: 3.0.1
+      extra-extensions: rubocop-rubomatic:gemfile

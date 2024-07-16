@@ -1,20 +1,23 @@
-FROM ruby:2-alpine
+FROM ruby:3.0.1
 
-ENV DUMB_INIT_VERSION 1.2.2
+RUN apt-get update && apt-get install -y curl vim htop
 
-RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v${DUMB_INIT_VERSION}/dumb-init_${DUMB_INIT_VERSION}_amd64 \
-    && chmod +x /usr/local/bin/dumb-init
+ENV APP_PATH="Eversign"
+WORKDIR /$APP_PATH
 
-WORKDIR /app
-ADD . /app
+ENV LOCK_PATH="Locks"
+RUN mkdir -p /$LOCK_PATH
 
-RUN apk add --update --no-cache build-base ruby-dev libc-dev shadow && \
-    usermod -d /app nobody && \
-    bundle install && \
-    apk del build-base ruby-dev libc-dev shadow && \
-    chown -R nobody:nogroup /app
+COPY . /$APP_PATH
 
-USER nobody
+ENV BUNDLER_VERSION 2.3.18
 
-ENTRYPOINT ["/usr/local/bin/dumb-init", "--", "bundle", "exec", "rspec"]
-CMD ["spec"]
+RUN gem install bundler -v $BUNDLER_VERSION
+RUN bundle update
+RUN mv Gemfile.lock /$LOCK_PATH/
+
+RUN cp /$APP_PATH/entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+
+CMD /bin/bash

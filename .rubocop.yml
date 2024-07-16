@@ -1,0 +1,19 @@
+inherit_gem:
+  rubocop-rubomatic:
+    - config/rubocop.yml
+    - config/gemspec_on.yml
+
+AllCops:
+  Exclude:
+    - 'examples/**/*'
+    - 'spec/**/*'
+
+Style/DocumentationMethod:
+  Enabled: false
+
+Naming/AccessorMethodName:
+  Enabled: false
+
+Style/DisableCopsWithinSourceCodeDirective:
+  AllowedCops:
+    - Security/Eval

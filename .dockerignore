@@ -1,0 +1,6 @@
+.dockerignore
+.git
+.github
+.env
+
+rubygems_credentials
