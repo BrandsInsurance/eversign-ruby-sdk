@@ -1,6 +1,6 @@
 == 0.3.0
 
-* Ruby Upgrade
+* Allow more up to date rubies
 
 == 0.2.0
 

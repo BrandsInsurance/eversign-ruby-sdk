@@ -29,9 +29,29 @@ module Eversign
       kartograph do
         mapping Eversign::Models::Field
 
-        property :name, :type, :x, :y, :width, :height, :page, :signer, :identifier, :required, :readonly, :merge, :type,
-                  :validation_type, :text_style, :text_font, :text_size, :text_color, :value, :options, :group
-
+        property(
+          :name,
+          :type,
+          :x,
+          :y,
+          :width,
+          :height,
+          :page,
+          :signer,
+          :identifier,
+          :required,
+          :readonly,
+          :merge,
+          :type,
+          :validation_type,
+          :text_style,
+          :text_font,
+          :text_size,
+          :text_color,
+          :value,
+          :options,
+          :group
+        )
       end
     end
 
@@ -51,22 +71,46 @@ module Eversign
       kartograph do
         mapping Eversign::Models::Document
 
-        property :document_hash, :template_id, :sandbox, :is_draft, :title, :message, :use_signer_order, :reminders, :require_all_signers,
-                  :redirect, :redirect_decline, :client, :expires, :embedded_signing_enabled, :requester_email, :is_template,
-                  :is_completed, :is_archived, :is_deleted, :is_trashed, :is_cancelled, :embedded, :in_person, :permission,
-                  :use_hidden_tags, :meta
+        property(
+          :document_hash,
+          :template_id,
+          :sandbox,
+          :is_draft,
+          :title,
+          :message,
+          :use_signer_order,
+          :reminders,
+          :require_all_signers,
+          :redirect,
+          :redirect_decline,
+          :client,
+          :expires,
+          :embedded_signing_enabled,
+          :requester_email,
+          :is_template,
+          :is_completed,
+          :is_archived,
+          :is_deleted,
+          :is_trashed,
+          :is_cancelled,
+          :embedded,
+          :in_person,
+          :permission,
+          :use_hidden_tags,
+          :meta
+        )
         property :files, plural: true, include: File
         property :signers, plural: true, include: Signer
         property :recipients, plural: true, include: Recipient
       end
 
-      def self.extract_collection(content, scope)
+      def self.extract_collection(content, _scope)
         data = JSON.parse(content)
         result = []
         data.each do |item|
           result << extract_single(item.to_json, nil)
-         end
-         result
+        end
+        result
       end
 
       def self.extract_single(content, scope)

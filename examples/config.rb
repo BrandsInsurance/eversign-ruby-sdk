@@ -13,11 +13,10 @@ module Config
   configurable String, :state
 end
 
-
 Eversign.configure do |c|
   c.api_base = 'https://api.eversign.com/api'
   c.access_key = '<ACCESS_KEY>'
-  c.business_id = 1234
+  c.business_id = 1_234
 end
 
 Config.configure do |c|

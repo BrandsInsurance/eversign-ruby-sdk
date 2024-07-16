@@ -24,10 +24,8 @@ module Eversign
   configurable String, :api_base do |value|
     value ||= 'https://api.eversign.com'
     parsed = Addressable::URI.parse(value)
-    if %w(http https).include?(parsed.scheme)
-      value
-    else
-      raise ArgumentError 'Invalid API Base URL' 
-    end
+    raise ArgumentError('Invalid API Base URL') if %w[http https].exclude?(parsed.scheme)
+
+    value
   end
 end

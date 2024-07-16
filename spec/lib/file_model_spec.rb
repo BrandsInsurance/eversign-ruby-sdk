@@ -1,7 +1,4 @@
-
-
 describe Eversign::Models::File do
-
   describe 'valid?' do
     let(:obj) { Eversign::Models::File.new('test') }
 
@@ -9,21 +6,21 @@ describe Eversign::Models::File do
       context 'only file_id is set' do
         it 'returns true' do
           obj.file_id = 'test_id'
-          expect(obj.valid?).to be true
+          expect(obj.valid?).to(be(true))
         end
       end
 
       context 'only file_url is set' do
         it 'returns true' do
           obj.file_url = 'test_url'
-          expect(obj.valid?).to be true
+          expect(obj.valid?).to(be(true))
         end
       end
 
       context 'only file_base64 is set' do
         it 'returns true' do
           obj.file_base64 = 'test_file_base64'
-          expect(obj.valid?).to be true
+          expect(obj.valid?).to(be(true))
         end
       end
     end
