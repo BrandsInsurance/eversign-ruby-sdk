@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('faraday', '>= 0.13')
   spec.add_dependency('faraday-multipart', '1.0.3')
   spec.add_dependency('kartograph', '~> 0.2.3')
-  spec.add_dependency('rails', '>= 4')
+  spec.add_dependency('activemodel', '>= 4')
 
   spec.add_development_dependency('bundler', '~> 2')
   spec.add_development_dependency('rake', '~> 10.0')

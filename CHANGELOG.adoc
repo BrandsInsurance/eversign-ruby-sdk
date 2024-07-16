@@ -6,6 +6,10 @@
 
 * ``Eversign::FileNotFoundException`` now inherits from ``StandardError``
 
+=== Other changes
+
+* ``rails`` dependency replaced by ``activemodel``
+
 == 0.2.0
 
 * Initial release
