@@ -13,3 +13,7 @@ Style/DocumentationMethod:
 
 Naming/AccessorMethodName:
   Enabled: false
+
+Style/DisableCopsWithinSourceCodeDirective:
+  AllowedCops:
+    - Security/Eval
