@@ -157,9 +157,7 @@ module Eversign
     def send_reminder_for_document(document_hash, signer_id)
       path = "/api/send_reminder?access_key=#{access_key}&business_id=#{business_id}"
       response = execute_request(:post, path, { document_hash: document_hash, signer_id: signer_id }.to_json)
-      # rubocop:disable Security/Eval
-      eval(response.body)[:success] ? true : extract_response(response.body)
-      # rubocop:enable Security/Eval
+      JSON.parse(response.body, { symbolize_names: true })[:success] ? true : extract_response(response.body)
     end
 
     private
@@ -188,9 +186,7 @@ module Eversign
 
       def delete(path, _document_hash)
         response = execute_request(:delete, path)
-        # rubocop:disable Security/Eval
-        eval(response.body)[:success] ? true : extract_response(response.body)
-        # rubocop:enable Security/Eval
+        JSON.parse(response.body, { symbolize_names: true })[:success] ? true : extract_response(response.body)
       end
 
       def download(sub_uri, path)
