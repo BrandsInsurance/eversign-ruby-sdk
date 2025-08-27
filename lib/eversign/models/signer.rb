@@ -11,6 +11,7 @@ module Eversign
       attr_accessor :message
       attr_accessor :deliver_email
       attr_accessor :role
+      attr_accessor :embedded_signing_url
 
       def initialize(name = nil, email = nil, role = nil)
         self.name = name

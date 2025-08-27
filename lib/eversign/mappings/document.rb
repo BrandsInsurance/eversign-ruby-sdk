@@ -21,7 +21,7 @@ module Eversign
       kartograph do
         mapping Eversign::Models::Signer
 
-        property :id, :name, :email, :order, :pin, :message, :deliver_email, :role
+        property :id, :name, :email, :order, :pin, :message, :deliver_email, :role, :embedded_signing_url
       end
     end
 
