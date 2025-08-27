@@ -10,6 +10,7 @@ on:
       - production
 jobs:
   rubocop:
+    if: (!github.event.pull_request.draft)
     uses: BrandsInsurance/expert-chainsaw/.github/workflows/rubocop.yml@check_rubocop.v1.0.0
     with:
       ruby-version: 3.0.1

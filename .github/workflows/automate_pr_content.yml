@@ -8,6 +8,7 @@ on:
       - ready_for_review
 jobs:
   automate-pr-content:
+    if: (!github.event.pull_request.draft)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
